@@ -3,16 +3,32 @@
 
     <nav class="navbar navbar-dark bg-dark">
         <router-link to="/">
-<h2 class="btn btn-warning stretched-link">Twooter</h2>
+<div>
+            <h2 class="btn btn-warning stretched-link">Twooter</h2>
+</div>
         </router-link>
+        <div v-if="user">
+            <h3 class="btn btn-primary">{{user.username}}</h3>
+        </div>
     </nav>
     <router-view/>
   </div>
 </template>
 <script>
+    import { useStore } from 'vuex';
+    import { computed } from 'vue';
 
     export default {
     name: 'App',
+        setup(){
+        const store = useStore();
+        const user =computed(()=> store.state.User.user);
+
+        return{
+            user
+        }
+        }
+
 
   }
 </script>
